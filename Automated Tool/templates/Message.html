@@ -1,0 +1,47 @@
+<div id="message"></div>
+
+<script>
+    var polipop = new Polipop('message', {
+        layout: 'popups',
+        insert: 'before',
+        pool: 3,
+        sticky: false,
+        position: 'bottom-right',
+        progressbar: true,
+        closer: false,
+    });
+</script>
+
+{% for message in messages %} {% if message.tags == 'error' %}
+<script>
+    polipop.add({
+        content: "{{ message }}",
+        title: "Error",
+        type: "error"
+    });
+</script>
+{% elif message.tags == 'success' %}
+<script>
+    polipop.add({
+        content: "{{ message }}",
+        title: "Success",
+        type: "success"
+    });
+</script>
+{% elif message.tags == 'info' %}
+<script>
+    polipop.add({
+        content: "{{ message }}",
+        title: "Information",
+        type: "info"
+    });
+</script>
+{% elif message.tags == 'warning' %}
+<script>
+    polipop.add({
+        content: "{{ message }}",
+        title: "Warning",
+        type: "warning"
+    });
+</script>
+{% endif %} {% endfor %}
